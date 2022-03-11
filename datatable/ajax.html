@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+
+</head>
+
+<body>
+    <table id="table" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Cath</th>
+                <th>BS.</th>
+                <th>Noun</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Cath</th>
+                <th>BS.</th>
+                <th>Noun</th>
+            </tr>
+        </tfoot>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+</body>
+<script>
+    $(document).ready(function () {
+        var data = {};
+        $.ajax({
+            url: 'https://6214b27889fad53b1f1bc406.mockapi.io/SanPham',
+            dataType: 'json',
+            success: function (dataReturn) {
+                data = dataReturn;
+                $('#table').DataTable({
+            "data": data,
+            "columns": [
+                { "data": "name" },
+                { "data": "city" },
+                { "data": "catch" },
+                { "data": "BS" },
+                { "data": "noun" }
+            ]
+        });
+              console.log(data);
+            }
+        });
+        
+    });
+
+</script>
+
+</html>

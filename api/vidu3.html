@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<style>
+    div.book {
+        width: 300px;
+        height: 400px;
+        margin: 4px;
+        border-style: solid;
+        float: left;
+    }
+
+    div.book img {
+        width: 300px;
+        height: 360px;
+    }
+</style>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function F1() {
+            $.ajax({
+                url: 'https://6214b27889fad53b1f1bc406.mockapi.io/SanPham',
+                dataType: 'json',
+                success: function (dataReturn) {
+                    console.log(dataReturn);
+                    $.each(dataReturn, function (k, v) {
+                        var s = `<div class="book" id= "${v.id}" onclick="F2(${v.id})">${v.id}-${v.name} - <br><img src="${v.img}"</div>`;
+                        $('#result1').append(s);
+                    });
+                }
+            });
+        }
+        function F2(id) {
+            $.ajax({
+                url: 'https://6214b27889fad53b1f1bc406.mockapi.io/SanPham' + "/" + id,
+                dataType: 'json',
+                type: 'DELETE',
+                success: function (dataReturn) {
+                    document.getElementById(id).style.display = 'none';
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    keyword <input type=text id='kw'>
+    <input type='button' value="Search" onclick='F1()'>
+    <div id=result1></div>
+</body>
+
+</html>
